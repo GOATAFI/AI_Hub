@@ -13,9 +13,31 @@ const displayData = (aiData) => {
   for (const singleData of aiData) {
     console.log(singleData);
     const dataCard = document.createElement("div");
+    // Assuming `singleData.features` is an array
+    let featuresHTML = "";
+    for (const feature of singleData.features) {
+      featuresHTML += `
+      <li>${feature}</li>
+      `;
+    }
+
     dataCard.innerHTML = `
-    <h1>${singleData.description}</h1>
-    `;
+    <div class="card bg-base-100 w-96 shadow-xl">
+        <figure>
+            <img src="${singleData.image}" />
+        </figure>
+        <div class="card-body">
+            <h2 class="card-title">${singleData.name}</h2>
+            <p>${singleData.description}</p>
+            <ol>
+                ${featuresHTML}
+            </ol>
+            <div class="card-actions justify-end">
+                <button class="btn btn-primary">Buy Now</button>
+            </div>
+        </div>
+    </div>
+`;
     showAiDataDiv.appendChild(dataCard);
   }
 };
